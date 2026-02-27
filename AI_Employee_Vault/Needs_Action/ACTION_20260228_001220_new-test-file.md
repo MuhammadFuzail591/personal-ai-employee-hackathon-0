@@ -1,0 +1,29 @@
+---
+type: file_drop
+original_name: new-test-file.txt
+copied_as: FILE_20260228_001220_new-test-file.txt
+size: 0 B
+received: 2026-02-28T00:12:20.343080
+priority: normal
+status: pending
+---
+
+## New File Dropped for Processing
+
+A new file has been detected in the Inbox drop folder and requires processing.
+
+**File:** `new-test-file.txt`
+**Size:** 0 B
+**Received:** 2026-02-28 00:12:20
+
+## Suggested Actions
+
+- [ ] Review file contents
+- [ ] Determine file type and intent
+- [ ] Process according to Company Handbook rules
+- [ ] Log outcome to `/Logs/`
+- [ ] Move this file to `/Done/` when complete
+
+## Notes
+
+> Add any notes here after reviewing the file.

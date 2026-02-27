@@ -1,0 +1,31 @@
+[project]
+name = "personal-ai-employee"
+version = "0.1.0"
+description = "Personal AI Employee - Bronze Tier: Autonomous Digital FTE powered by Claude Code"
+requires-python = ">=3.13"
+dependencies = [
+    "watchdog>=4.0.0",
+    "python-dotenv>=1.0.0",
+    "google-api-python-client>=2.0.0",
+    "google-auth-httplib2>=0.2.0",
+    "google-auth-oauthlib>=1.0.0",
+    "playwright>=1.40.0",
+    "rich>=13.0.0",
+]
+
+[project.scripts]
+file-watcher = "watchers.filesystem_watcher:main"
+gmail-watcher = "watchers.gmail_watcher:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["watchers"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.uv]
+dev-dependencies = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+]

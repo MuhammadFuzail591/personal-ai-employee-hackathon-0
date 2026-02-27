@@ -1,0 +1,32 @@
+# Environment & secrets
+.env
+*.env
+credentials/
+sessions/
+*.json.bak
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+dist/
+build/
+*.egg-info/
+.pytest_cache/
+
+# UV
+.python-version
+
+# Vault runtime state
+AI_Employee_Vault/.gmail_processed_ids.json
+AI_Employee_Vault/Logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Obsidian
+AI_Employee_Vault/.obsidian/workspace.json
+AI_Employee_Vault/.obsidian/workspace-mobile.json
