@@ -33,18 +33,46 @@ class DropFolderHandler(FileSystemEventHandler):
         self.logger = setup_logging("DropFolderHandler")
         self._processed: set[str] = set()
 
+    def _should_process(self, path: Path) -> bool:
+        """Check if a file should be processed."""
+        if path.name.startswith(".") or path.name.endswith("~"):
+            return False
+        if not path.is_file():
+            return False
+        if str(path) in self._processed:
+            return False
+        return True
+
     def on_created(self, event):
         if event.is_directory:
             return
         source = Path(event.src_path)
-        # Skip hidden files and temp files
-        if source.name.startswith(".") or source.name.endswith("~"):
-            return
-        if str(source) in self._processed:
+        if not self._should_process(source):
             return
         self._processed.add(str(source))
-
         self.logger.info(f"New file detected in Inbox: {source.name}")
+        self._handle_new_file(source)
+
+    def on_moved(self, event):
+        """Handle files moved/renamed into Inbox (Obsidian uses atomic writes)."""
+        if event.is_directory:
+            return
+        source = Path(event.dest_path)
+        if not self._should_process(source):
+            return
+        self._processed.add(str(source))
+        self.logger.info(f"New file detected in Inbox (moved): {source.name}")
+        self._handle_new_file(source)
+
+    def on_modified(self, event):
+        """Fallback for editors that modify files in-place."""
+        if event.is_directory:
+            return
+        source = Path(event.src_path)
+        if not self._should_process(source):
+            return
+        self._processed.add(str(source))
+        self.logger.info(f"New file detected in Inbox (modified): {source.name}")
         self._handle_new_file(source)
 
     def _handle_new_file(self, source: Path):
