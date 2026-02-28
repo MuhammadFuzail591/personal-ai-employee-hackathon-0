@@ -1,2 +1,1 @@
-
-Hey this is just test file for checking bronze tier.
+This is just simple file to test bronze tier working.
